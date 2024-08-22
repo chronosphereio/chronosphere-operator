@@ -1,0 +1,27 @@
+# permissions for end users to edit chronospheredroprules.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronospheredroprule-editor-role
+rules:
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheredroprules
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheredroprules/status
+  verbs:
+  - get

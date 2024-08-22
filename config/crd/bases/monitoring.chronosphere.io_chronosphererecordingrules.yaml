@@ -1,0 +1,116 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: chronosphererecordingrules.monitoring.chronosphere.io
+spec:
+  group: monitoring.chronosphere.io
+  names:
+    kind: ChronosphereRecordingRule
+    listKind: ChronosphereRecordingRuleList
+    plural: chronosphererecordingrules
+    singular: chronosphererecordingrule
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ChronosphereRecordingRule is the Schema for the chronosphererecordingrules
+          API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ChronosphereRecordingRuleSpec defines the desired state of
+              ChronosphereRecordingRule
+            properties:
+              bucket_slug:
+                description: Optional slug of the bucket the RecordingRule belongs
+                  to.
+                type: string
+              created_at:
+                description: |-
+                  Timestamp of when the RecordingRule was created. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              execution_group:
+                description: |-
+                  Optional execution_group in which this rule is to be evaluated.
+                  At least one of bucket_slug and execution_group must be set. If both are set, then they are expected to match.
+                type: string
+              interval_secs:
+                description: Optional interval for evaluating the recording rule.
+                format: int32
+                type: integer
+              label_policy:
+                description: label policy
+                properties:
+                  add:
+                    additionalProperties:
+                      type: string
+                    description: Labels to add or overwrite before storing the result.
+                    type: object
+                type: object
+              metric_name:
+                description: |-
+                  The name of the time series to use for output, which must be a valid
+                  metric name.
+                type: string
+              name:
+                description: Required name of the RecordingRule. May be modified after
+                  the RecordingRule is created.
+                type: string
+              prometheus_expr:
+                description: |-
+                  The PromQL expression to evaluate at the time of each evaluation cycle.
+                  The result is recorded as a new time series with its metric name
+                  defined by the metric_name (or name) field.
+                type: string
+              slug:
+                description: Unique identifier of the RecordingRule. If slug is not
+                  provided, one will be generated based of the name field. Cannot
+                  be modified after the RecordingRule is created.
+                type: string
+              updated_at:
+                description: |-
+                  Timestamp of when the RecordingRule was last updated. Cannot be set by clients.
+                  Read Only: true
+                type: string
+            type: object
+          status:
+            description: ChronosphereRecordingRuleStatus defines the observed state
+              of ChronosphereRecordingRule
+            properties:
+              lastProcessedGeneration:
+                format: int64
+                type: integer
+              message:
+                type: string
+              state:
+                description: |-
+                  INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
+                  Important: Run "make" to regenerate code after modifying this file
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

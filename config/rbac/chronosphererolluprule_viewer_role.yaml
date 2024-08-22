@@ -1,0 +1,23 @@
+# permissions for end users to view chronosphererolluprules.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronosphererolluprule-viewer-role
+rules:
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphererolluprules
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphererolluprules/status
+  verbs:
+  - get

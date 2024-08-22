@@ -1,0 +1,23 @@
+apiVersion: monitoring.chronosphere.io/v1alpha1
+kind: ChronosphereMappingRule
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronospheremappingrule-sample
+spec:
+  slug: operator-test-mapping-rule
+  name: "Operator Test: Mappping Rule"
+  created_at: "2024-02-27T03:17:55.000Z"
+  updated_at: "2024-03-13T05:33:17.000Z"
+  filters:
+    - name: __otel_type__
+      value_glob: sum
+    - name: __otel_temporality__
+      value_glob: delta
+    - name: __name__
+      value_glob: '*'
+  aggregation_policy:
+    aggregation: SUM
+    interval: 1m
+  mode: PREVIEW

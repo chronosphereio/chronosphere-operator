@@ -1,0 +1,40 @@
+resources:
+# All RBAC will be applied under this service account in
+# the deployment namespace. You may comment out this resource
+# if your manager will use a service account that exists at
+# runtime. Be sure to update RoleBinding and ClusterRoleBinding
+# subjects if changing service account names.
+- service_account.yaml
+- role.yaml
+- role_binding.yaml
+- leader_election_role.yaml
+- leader_election_role_binding.yaml
+# For each CRD, "Editor" and "Viewer" roles are scaffolded by
+# default, aiding admins in cluster management. Those roles are
+# not used by the Project itself. You can comment the following lines
+# if you do not want those helpers be installed with your Project.
+- chronosphereresourcepools_editor_role.yaml
+- chronosphereresourcepools_viewer_role.yaml
+- chronospheremappingrule_editor_role.yaml
+- chronospheremappingrule_viewer_role.yaml
+- chronosphererecordingrule_editor_role.yaml
+- chronosphererecordingrule_viewer_role.yaml
+- chronosphererolluprule_editor_role.yaml
+- chronosphererolluprule_viewer_role.yaml
+- chronospheredroprule_editor_role.yaml
+- chronospheredroprule_viewer_role.yaml
+- chronospherecollection_editor_role.yaml
+- chronospherecollection_viewer_role.yaml
+- chronosphereteam_editor_role.yaml
+- chronosphereteam_viewer_role.yaml
+- chronospherenotificationpolicy_editor_role.yaml
+- chronospherenotificationpolicy_viewer_role.yaml
+- chronospherenotifier_editor_role.yaml
+- chronospherenotifier_viewer_role.yaml
+- chronospheremonitor_editor_role.yaml
+- chronospheremonitor_viewer_role.yaml
+- chronospheredashboard_editor_role.yaml
+- chronospheredashboard_viewer_role.yaml
+- chronosphereclassicdashboard_editor_role.yaml
+- chronosphereclassicdashboard_viewer_role.yaml
+

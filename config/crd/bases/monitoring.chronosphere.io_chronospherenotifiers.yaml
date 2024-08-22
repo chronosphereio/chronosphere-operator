@@ -1,0 +1,566 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: chronospherenotifiers.monitoring.chronosphere.io
+spec:
+  group: monitoring.chronosphere.io
+  names:
+    kind: ChronosphereNotifier
+    listKind: ChronosphereNotifierList
+    plural: chronospherenotifiers
+    singular: chronospherenotifier
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ChronosphereNotifier is the Schema for the chronospherenotifiers
+          API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ChronosphereNotifierSpec defines the desired state of ChronosphereNotifier
+            properties:
+              created_at:
+                description: |-
+                  Timestamp of when the Notifier was created. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              discard:
+                description: |-
+                  If set, enables the "discard" integration which simply discards all
+                  notifications. Cannot set if another integration is set.
+                type: boolean
+              email:
+                description: email
+                properties:
+                  html:
+                    description: Optional HTML body of the email.
+                    type: string
+                  text:
+                    description: Optional text body of the email.
+                    type: string
+                  to:
+                    description: Required email address to send notifications to.
+                    type: string
+                type: object
+              name:
+                description: Required name of the Notifier. May be modified after
+                  the Notifier is created.
+                type: string
+              ops_genie:
+                description: ops genie
+                properties:
+                  api_key:
+                    description: Required OpsGenie API key.
+                    type: string
+                  api_url:
+                    description: |-
+                      Required OpsGenie API URL to send requests to, e.g.
+                      "https://api.opsgenie.com/".
+                    type: string
+                  description:
+                    description: Description of the alert.
+                    type: string
+                  details:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      A set of arbitrary key/value pairs that provide further detail about the
+                      alert.
+                    type: object
+                  http_config:
+                    description: http config
+                    properties:
+                      basic_auth:
+                        description: basic auth
+                        properties:
+                          password:
+                            description: password
+                            type: string
+                          username:
+                            description: username
+                            type: string
+                        type: object
+                      bearer_token:
+                        description: Bearer token authentication. Cannot be set if
+                          basic_auth is set.
+                        type: string
+                      proxy_url:
+                        description: |-
+                          Optional proxy URL.
+                          DEPRECATED: Custom proxies are unsupported.
+                        type: string
+                      tls_config:
+                        description: tls config
+                        properties:
+                          insecure_skip_verify:
+                            description: Disables validation of the server certificate.
+                            type: boolean
+                        type: object
+                    type: object
+                  message:
+                    description: Alert text.
+                    type: string
+                  note:
+                    description: Additional alert note.
+                    type: string
+                  priority:
+                    description: Priority level of alert. Possible values are P1,
+                      P2, P3, P4, and P5.
+                    type: string
+                  responders:
+                    description: List of responders responsible for notifications.
+                    items:
+                      description: |-
+                        OpsGenieConfigResponder ops genie config responder
+
+
+                        swagger:model OpsGenieConfigResponder
+                      properties:
+                        id:
+                          description: ID of the responder. Cannot be set if name
+                            or username are set.
+                          type: string
+                        name:
+                          description: Name of the responder. Cannot be set if id
+                            or username are set.
+                          type: string
+                        responder_type:
+                          description: responder type
+                          type: string
+                        username:
+                          description: Username of the responder. Cannot be set if
+                            id or name are set.
+                          type: string
+                      type: object
+                    type: array
+                  source:
+                    description: A backlink to the sender of the notification.
+                    type: string
+                  tags:
+                    description: Comma separated list of tags attached to the notifications.
+                    type: string
+                type: object
+              pagerduty:
+                description: pagerduty
+                properties:
+                  class:
+                    description: The class/type of the event.
+                    type: string
+                  client:
+                    description: Client identification of the notification sender.
+                    type: string
+                  client_url:
+                    description: A backlink to the sender of the notification.
+                    type: string
+                  component:
+                    description: The part or component of the affected system which
+                      is broken.
+                    type: string
+                  description:
+                    description: Description of the incident.
+                    type: string
+                  details:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      Set of arbitrary key/value pairs which provide further detail about the
+                      incident.
+                    type: object
+                  group:
+                    description: A cluster or grouping of services.
+                    type: string
+                  http_config:
+                    description: http config
+                    properties:
+                      basic_auth:
+                        description: basic auth
+                        properties:
+                          password:
+                            description: password
+                            type: string
+                          username:
+                            description: username
+                            type: string
+                        type: object
+                      bearer_token:
+                        description: Bearer token authentication. Cannot be set if
+                          basic_auth is set.
+                        type: string
+                      proxy_url:
+                        description: |-
+                          Optional proxy URL.
+                          DEPRECATED: Custom proxies are unsupported.
+                        type: string
+                      tls_config:
+                        description: tls config
+                        properties:
+                          insecure_skip_verify:
+                            description: Disables validation of the server certificate.
+                            type: boolean
+                        type: object
+                    type: object
+                  images:
+                    description: Images to attach to the incident.
+                    items:
+                      description: |-
+                        PagerdutyConfigImage pagerduty config image
+
+
+                        swagger:model PagerdutyConfigImage
+                      properties:
+                        alt:
+                          description: alt
+                          type: string
+                        href:
+                          description: href
+                          type: string
+                        src:
+                          description: src
+                          type: string
+                      type: object
+                    type: array
+                  links:
+                    description: Links to attach to the incident.
+                    items:
+                      description: |-
+                        PagerdutyConfigLink pagerduty config link
+
+
+                        swagger:model PagerdutyConfigLink
+                      properties:
+                        href:
+                          description: href
+                          type: string
+                        text:
+                          description: text
+                          type: string
+                      type: object
+                    type: array
+                  routing_key:
+                    description: |-
+                      The PagerDuty integration key (when using PagerDuty integration type
+                      "Events API v2"). Cannot be set if service_key is set.
+                    type: string
+                  service_key:
+                    description: |-
+                      The PagerDuty integration key (when using PagerDuty integration type
+                      "Prometheus"). Cannot be set if routing_key is set.
+                    type: string
+                  severity:
+                    description: |-
+                      Severity of the incident.
+                      Valid values are 'critical', 'error', 'warning', 'info', or blank
+                    type: string
+                  url:
+                    description: The Pagerduty URL to send API requests to.
+                    type: string
+                type: object
+              skip_resolved:
+                description: If true, do not notify on resolved alerts. Cannot set
+                  if discard is set.
+                type: boolean
+              slack:
+                description: slack
+                properties:
+                  actions:
+                    description: actions
+                    items:
+                      description: |-
+                        NotifierSlackConfigAction notifier slack config action
+
+
+                        swagger:model NotifierSlackConfigAction
+                      properties:
+                        confirm_field:
+                          description: confirm field
+                          properties:
+                            dismiss_text:
+                              description: dismiss text
+                              type: string
+                            ok_text:
+                              description: ok text
+                              type: string
+                            text:
+                              description: text
+                              type: string
+                            title:
+                              description: title
+                              type: string
+                          type: object
+                        name:
+                          description: name
+                          type: string
+                        style:
+                          description: style
+                          type: string
+                        text:
+                          description: text
+                          type: string
+                        type:
+                          description: type
+                          type: string
+                        url:
+                          description: url
+                          type: string
+                        value:
+                          description: value
+                          type: string
+                      type: object
+                    type: array
+                  api_url:
+                    description: Required Slack webhook API URL.
+                    type: string
+                  callback_id:
+                    description: callback id
+                    type: string
+                  channel:
+                    description: The channel to send notifications to.
+                    type: string
+                  color:
+                    description: color
+                    type: string
+                  fallback:
+                    description: fallback
+                    type: string
+                  fields:
+                    description: fields
+                    items:
+                      description: |-
+                        SlackConfigField slack config field
+
+
+                        swagger:model SlackConfigField
+                      properties:
+                        short:
+                          description: short
+                          type: boolean
+                        title:
+                          description: title
+                          type: string
+                        value:
+                          description: value
+                          type: string
+                      type: object
+                    type: array
+                  footer:
+                    description: footer
+                    type: string
+                  http_config:
+                    description: http config
+                    properties:
+                      basic_auth:
+                        description: basic auth
+                        properties:
+                          password:
+                            description: password
+                            type: string
+                          username:
+                            description: username
+                            type: string
+                        type: object
+                      bearer_token:
+                        description: Bearer token authentication. Cannot be set if
+                          basic_auth is set.
+                        type: string
+                      proxy_url:
+                        description: |-
+                          Optional proxy URL.
+                          DEPRECATED: Custom proxies are unsupported.
+                        type: string
+                      tls_config:
+                        description: tls config
+                        properties:
+                          insecure_skip_verify:
+                            description: Disables validation of the server certificate.
+                            type: boolean
+                        type: object
+                    type: object
+                  icon_emoji:
+                    description: icon emoji
+                    type: string
+                  icon_url:
+                    description: icon url
+                    type: string
+                  image_url:
+                    description: image url
+                    type: string
+                  link_names:
+                    description: link names
+                    type: boolean
+                  mrkdwn_in:
+                    description: mrkdwn in
+                    items:
+                      type: string
+                    type: array
+                  pretext:
+                    description: pretext
+                    type: string
+                  short_fields:
+                    description: short fields
+                    type: boolean
+                  text:
+                    description: text
+                    type: string
+                  thumb_url:
+                    description: thumb url
+                    type: string
+                  title:
+                    description: title
+                    type: string
+                  title_link:
+                    description: title link
+                    type: string
+                  username:
+                    description: The user to send notifications to.
+                    type: string
+                type: object
+              slug:
+                description: Unique identifier of the Notifier. If slug is not provided,
+                  one will be generated based of the name field. Cannot be modified
+                  after the Notifier is created.
+                type: string
+              updated_at:
+                description: |-
+                  Timestamp of when the Notifier was last updated. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              victor_ops:
+                description: victor ops
+                properties:
+                  api_key:
+                    description: Required VictorOps API key.
+                    type: string
+                  api_url:
+                    description: Required VictorOps API URL.
+                    type: string
+                  custom_fields:
+                    additionalProperties:
+                      type: string
+                    description: custom fields
+                    type: object
+                  entity_display_name:
+                    description: Summary of the alerted problem.
+                    type: string
+                  http_config:
+                    description: http config
+                    properties:
+                      basic_auth:
+                        description: basic auth
+                        properties:
+                          password:
+                            description: password
+                            type: string
+                          username:
+                            description: username
+                            type: string
+                        type: object
+                      bearer_token:
+                        description: Bearer token authentication. Cannot be set if
+                          basic_auth is set.
+                        type: string
+                      proxy_url:
+                        description: |-
+                          Optional proxy URL.
+                          DEPRECATED: Custom proxies are unsupported.
+                        type: string
+                      tls_config:
+                        description: tls config
+                        properties:
+                          insecure_skip_verify:
+                            description: Disables validation of the server certificate.
+                            type: boolean
+                        type: object
+                    type: object
+                  message_type:
+                    description: Describes the behavior of the alert (CRITICAL, WARNING,
+                      INFO).
+                    type: string
+                  monitoring_tool:
+                    description: The monitoring tool the state message is from.
+                    type: string
+                  routing_key:
+                    description: Required VictorOps routing key.
+                    type: string
+                  state_message:
+                    description: Long explanation of the alerted problem.
+                    type: string
+                type: object
+              webhook:
+                description: webhook
+                properties:
+                  http_config:
+                    description: http config
+                    properties:
+                      basic_auth:
+                        description: basic auth
+                        properties:
+                          password:
+                            description: password
+                            type: string
+                          username:
+                            description: username
+                            type: string
+                        type: object
+                      bearer_token:
+                        description: Bearer token authentication. Cannot be set if
+                          basic_auth is set.
+                        type: string
+                      proxy_url:
+                        description: |-
+                          Optional proxy URL.
+                          DEPRECATED: Custom proxies are unsupported.
+                        type: string
+                      tls_config:
+                        description: tls config
+                        properties:
+                          insecure_skip_verify:
+                            description: Disables validation of the server certificate.
+                            type: boolean
+                        type: object
+                    type: object
+                  url:
+                    description: Required webhook URL (will be called as a POST request).
+                    type: string
+                type: object
+            type: object
+          status:
+            description: ChronosphereNotifierStatus defines the observed state of
+              ChronosphereNotifier
+            properties:
+              lastProcessedGeneration:
+                format: int64
+                type: integer
+              message:
+                type: string
+              state:
+                description: |-
+                  INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
+                  Important: Run "make" to regenerate code after modifying this file
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

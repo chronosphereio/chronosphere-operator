@@ -1,0 +1,318 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereclassicdashboards
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereclassicdashboards/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereclassicdashboards/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherecollections
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherecollections/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherecollections/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheredashboards
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheredashboards/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheredashboards/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheredroprules
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheredroprules/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheredroprules/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheremappingrules
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheremappingrules/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheremappingrules/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheremonitors
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheremonitors/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospheremonitors/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherenotificationpolicies
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherenotificationpolicies/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherenotificationpolicies/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherenotifiers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherenotifiers/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherenotifiers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphererecordingrules
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphererecordingrules/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphererecordingrules/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereresourcepools
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereresourcepools/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereresourcepools/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphererolluprules
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphererolluprules/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphererolluprules/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereteams
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereteams/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereteams/status
+  verbs:
+  - get
+  - patch
+  - update

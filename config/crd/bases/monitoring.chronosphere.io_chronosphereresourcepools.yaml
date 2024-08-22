@@ -1,0 +1,239 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: chronosphereresourcepools.monitoring.chronosphere.io
+spec:
+  group: monitoring.chronosphere.io
+  names:
+    kind: ChronosphereResourcePools
+    listKind: ChronosphereResourcePoolsList
+    plural: chronosphereresourcepools
+    singular: chronosphereresourcepools
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ChronosphereResourcePools is the Schema for the chronosphereresourcepools
+          API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ChronosphereResourcePoolsSpec defines the desired state of
+              ChronosphereResourcePools
+            properties:
+              created_at:
+                description: |-
+                  Timestamp of when the ResourcePools was created. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              default_pool:
+                description: default pool
+                properties:
+                  allocation:
+                    description: allocation
+                    properties:
+                      percent_of_license:
+                        description: |-
+                          Percentage of the license to allocate to this pool. Must be between 0
+                          and 100 inclusive. The percent_of_license values across all pools
+                          (including the default pool) must add up to exactly 100.
+                        type: number
+                    type: object
+                  priorities:
+                    description: priorities
+                    properties:
+                      high_priority_filters:
+                        description: |-
+                          Required filters which define which metrics are high priority, where any
+                          metric which matches at least one filter is considered high priority.
+                          High priority metrics are dropped last when the license limit is exceeded.
+                        items:
+                          description: |-
+                            Configv1LabelFilter configv1 label filter
+
+
+                            swagger:model configv1LabelFilter
+                          properties:
+                            name:
+                              description: |-
+                                Name of the label to match.
+                                Example: job
+                              type: string
+                            value_glob:
+                              description: |-
+                                Glob value of the label to match.
+                                Example: myservice*
+                              type: string
+                          type: object
+                        type: array
+                      low_priority_filters:
+                        description: |-
+                          Required filters which define which metrics are low priority, where any
+                          metric which matches at least one filter is considered low priority. Low
+                          priority metrics are dropped first when the license limit is exceeded.
+                        items:
+                          description: |-
+                            Configv1LabelFilter configv1 label filter
+
+
+                            swagger:model configv1LabelFilter
+                          properties:
+                            name:
+                              description: |-
+                                Name of the label to match.
+                                Example: job
+                              type: string
+                            value_glob:
+                              description: |-
+                                Glob value of the label to match.
+                                Example: myservice*
+                              type: string
+                          type: object
+                        type: array
+                    type: object
+                type: object
+              pools:
+                description: Optional pools.
+                items:
+                  description: |-
+                    ResourcePoolsPool resource pools pool
+
+
+                    swagger:model ResourcePoolsPool
+                  properties:
+                    allocation:
+                      description: allocation
+                      properties:
+                        percent_of_license:
+                          description: |-
+                            Percentage of the license to allocate to this pool. Must be between 0
+                            and 100 inclusive. The percent_of_license values across all pools
+                            (including the default pool) must add up to exactly 100.
+                          type: number
+                      type: object
+                    filters:
+                      description: |-
+                        Required filters which define which metrics map to this pool, where any
+                        metric which matches at least one filter will map to the pool.
+                      items:
+                        description: |-
+                          Configv1LabelFilter configv1 label filter
+
+
+                          swagger:model configv1LabelFilter
+                        properties:
+                          name:
+                            description: |-
+                              Name of the label to match.
+                              Example: job
+                            type: string
+                          value_glob:
+                            description: |-
+                              Glob value of the label to match.
+                              Example: myservice*
+                            type: string
+                        type: object
+                      type: array
+                    name:
+                      description: Required name of the pool. Must be unique.
+                      type: string
+                    priorities:
+                      description: priorities
+                      properties:
+                        high_priority_filters:
+                          description: |-
+                            Required filters which define which metrics are high priority, where any
+                            metric which matches at least one filter is considered high priority.
+                            High priority metrics are dropped last when the license limit is exceeded.
+                          items:
+                            description: |-
+                              Configv1LabelFilter configv1 label filter
+
+
+                              swagger:model configv1LabelFilter
+                            properties:
+                              name:
+                                description: |-
+                                  Name of the label to match.
+                                  Example: job
+                                type: string
+                              value_glob:
+                                description: |-
+                                  Glob value of the label to match.
+                                  Example: myservice*
+                                type: string
+                            type: object
+                          type: array
+                        low_priority_filters:
+                          description: |-
+                            Required filters which define which metrics are low priority, where any
+                            metric which matches at least one filter is considered low priority. Low
+                            priority metrics are dropped first when the license limit is exceeded.
+                          items:
+                            description: |-
+                              Configv1LabelFilter configv1 label filter
+
+
+                              swagger:model configv1LabelFilter
+                            properties:
+                              name:
+                                description: |-
+                                  Name of the label to match.
+                                  Example: job
+                                type: string
+                              value_glob:
+                                description: |-
+                                  Glob value of the label to match.
+                                  Example: myservice*
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                  type: object
+                type: array
+              updated_at:
+                description: |-
+                  Timestamp of when the ResourcePools was last updated. Cannot be set by clients.
+                  Read Only: true
+                type: string
+            type: object
+          status:
+            description: ChronosphereResourcePoolsStatus defines the observed state
+              of ChronosphereResourcePools
+            properties:
+              lastProcessedGeneration:
+                format: int64
+                type: integer
+              message:
+                type: string
+              state:
+                description: |-
+                  INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
+                  Important: Run "make" to regenerate code after modifying this file
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

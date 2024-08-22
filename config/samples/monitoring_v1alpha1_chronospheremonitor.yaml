@@ -1,0 +1,73 @@
+apiVersion: monitoring.chronosphere.io/v1alpha1
+kind: ChronosphereMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronospheremonitor-sample
+spec:
+  slug: operator-test-monitor
+  name: "Operator Test: Monitor"
+  created_at: "2024-04-16T00:12:44.000Z"
+  updated_at: "2024-04-16T00:12:44.000Z"
+  collection_slug: operator-test-collection
+  labels:
+    priority: sev-1
+  signal_grouping:
+    label_names:
+      - app
+      - grpc_service
+  series_conditions:
+    defaults:
+      warn:
+        conditions:
+          - op: GT
+            value: 5
+            sustain_secs: 240
+            resolve_sustain_secs: 60
+      critical:
+        conditions:
+          - op: GT
+            value: 10
+            sustain_secs: 120
+            resolve_sustain_secs: 60
+    overrides:
+      - label_matchers:
+          - type: EXACT
+            name: app
+            value: dbmon
+        severity_conditions:
+          critical:
+            conditions:
+              - op: GT
+                value: 1
+                sustain_secs: 60
+  notification_policy_slug: operator-test-notificaion-policy
+  interval_secs: 30
+  prometheus_query: sum (rate(grpc_server_handled_total{}[1m])) by (app, grpc_service, grpc_method)
+  schedule:
+    timezone: UTC
+    weekly_schedule:
+      monday:
+        active: ONLY_DURING_RANGES
+        ranges:
+          - start_hh_mm: "15:00"
+            end_hh_mm: "22:30"
+          - start_hh_mm: "07:00"
+            end_hh_mm: "10:10"
+      tuesday:
+        active: NEVER
+      wednesday:
+        active: NEVER
+      thursday:
+        active: ONLY_DURING_RANGES
+        ranges:
+          - start_hh_mm: "21:15"
+            end_hh_mm: "24:00"
+      friday:
+        active: NEVER
+      saturday:
+        active: NEVER
+      sunday:
+        active: NEVER
+

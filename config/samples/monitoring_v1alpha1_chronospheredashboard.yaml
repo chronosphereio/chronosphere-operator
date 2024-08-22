@@ -1,0 +1,75 @@
+apiVersion: monitoring.chronosphere.io/v1alpha1
+kind: ChronosphereDashboard
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronospheredashboard-sample
+spec:
+  slug: operator-test-standard-dashboard
+  name: "Operator Test: Chronosphere Dashboard"
+  created_at: "2023-10-25T20:46:07.000Z"
+  updated_at: "2023-10-25T20:46:44.000Z"
+  collection_slug: operator-test-collection
+  dashboard_json: '{
+  "kind": "Dashboard",
+  "spec": {
+    "events": [],
+    "panels": {
+      "1": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "",
+            "description": ""
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {}
+          },
+          "queries": [
+            {
+              "kind": "DataQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "1"
+                  }
+                }
+              }
+            }
+          ],
+          "links": []
+        }
+      }
+    },
+    "layouts": [
+      {
+        "kind": "Grid",
+        "spec": {
+          "display": {
+            "title": "Panel Group",
+            "collapse": {
+              "open": true
+            }
+          },
+          "items": [
+            {
+              "x": 0,
+              "y": 0,
+              "width": 12,
+              "height": 6,
+              "content": {
+                "$ref": "#/spec/panels/1"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "variables": [],
+    "duration": "30m"
+  },
+  "spec_version": "1"
+}'

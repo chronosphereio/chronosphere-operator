@@ -1,0 +1,27 @@
+# permissions for end users to edit chronosphereteams.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronosphereteam-editor-role
+rules:
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereteams
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronosphereteams/status
+  verbs:
+  - get

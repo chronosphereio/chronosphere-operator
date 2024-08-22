@@ -1,0 +1,18 @@
+apiVersion: monitoring.chronosphere.io/v1alpha1
+kind: ChronosphereRecordingRule
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronosphererecordingrule-sample
+spec:
+  slug: operator-test-recording-rule
+  name: "Operator Test: Recording Rule"
+  created_at: "2024-06-18T21:59:07.000Z"
+  updated_at: "2024-06-18T21:59:07.000Z"
+  label_policy:
+    add:
+      foo: bar
+  metric_name: slo:objective:ratio
+  prometheus_expr: vector(0.995)
+  execution_group: operator-test-recording-rule

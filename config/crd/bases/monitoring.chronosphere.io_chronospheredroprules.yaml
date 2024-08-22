@@ -1,0 +1,137 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: chronospheredroprules.monitoring.chronosphere.io
+spec:
+  group: monitoring.chronosphere.io
+  names:
+    kind: ChronosphereDropRule
+    listKind: ChronosphereDropRuleList
+    plural: chronospheredroprules
+    singular: chronospheredroprule
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ChronosphereDropRule is the Schema for the chronospheredroprules
+          API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ChronosphereDropRuleSpec defines the desired state of ChronosphereDropRule
+            properties:
+              conditional_rate_based_drop:
+                description: conditional rate based drop
+                properties:
+                  activated_drop_duration_secs:
+                    description: |-
+                      Once activated, activated_drop_duration_secs defines how long the drop
+                      rule stays activated before rechecking against the rate_limit_threshold.
+                    format: int32
+                    type: integer
+                  enabled:
+                    description: Enables rate-based metric dropping.
+                    type: boolean
+                  rate_limit_threshold:
+                    description: |-
+                      Percentage of the licensed limit reached in order to activate the drop
+                      rule, between 0 and 100.
+                    type: number
+                type: object
+              created_at:
+                description: |-
+                  Timestamp of when the DropRule was created. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              drop_nan_value:
+                description: Drops datapoints if datapoint values are NaN.
+                type: boolean
+              filters:
+                description: Series that match this filter are dropped.
+                items:
+                  description: |-
+                    Configv1LabelFilter configv1 label filter
+
+
+                    swagger:model configv1LabelFilter
+                  properties:
+                    name:
+                      description: |-
+                        Name of the label to match.
+                        Example: job
+                      type: string
+                    value_glob:
+                      description: |-
+                        Glob value of the label to match.
+                        Example: myservice*
+                      type: string
+                  type: object
+                type: array
+              mode:
+                description: mode
+                type: string
+              name:
+                description: Required name of the DropRule. May be modified after
+                  the DropRule is created.
+                type: string
+              slug:
+                description: Unique identifier of the DropRule. If slug is not provided,
+                  one will be generated based of the name field. Cannot be modified
+                  after the DropRule is created.
+                type: string
+              updated_at:
+                description: |-
+                  Timestamp of when the DropRule was last updated. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              value_based_drop:
+                description: value based drop
+                properties:
+                  enabled:
+                    description: Enables value-based metric dropping.
+                    type: boolean
+                  target_drop_value:
+                    description: The target datapoint value at which to drop metrics.
+                    type: number
+                type: object
+            type: object
+          status:
+            description: ChronosphereDropRuleStatus defines the observed state of
+              ChronosphereDropRule
+            properties:
+              lastProcessedGeneration:
+                format: int64
+                type: integer
+              message:
+                type: string
+              state:
+                description: |-
+                  INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
+                  Important: Run "make" to regenerate code after modifying this file
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

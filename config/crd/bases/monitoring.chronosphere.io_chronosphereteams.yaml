@@ -1,0 +1,89 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: chronosphereteams.monitoring.chronosphere.io
+spec:
+  group: monitoring.chronosphere.io
+  names:
+    kind: ChronosphereTeam
+    listKind: ChronosphereTeamList
+    plural: chronosphereteams
+    singular: chronosphereteam
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ChronosphereTeam is the Schema for the chronosphereteams API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ChronosphereTeamSpec defines the desired state of ChronosphereTeam
+            properties:
+              created_at:
+                description: |-
+                  Timestamp of when the Team was created. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              description:
+                description: Optional short description of the team.
+                type: string
+              name:
+                description: Required name of the Team. May be modified after the
+                  Team is created.
+                type: string
+              slug:
+                description: Unique identifier of the Team. If slug is not provided,
+                  one will be generated based of the name field. Cannot be modified
+                  after the Team is created.
+                type: string
+              updated_at:
+                description: |-
+                  Timestamp of when the Team was last updated. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              user_emails:
+                description: Unordered set of emails whose users are members of this
+                  team.
+                items:
+                  type: string
+                type: array
+            type: object
+          status:
+            description: ChronosphereTeamStatus defines the observed state of ChronosphereTeam
+            properties:
+              lastProcessedGeneration:
+                format: int64
+                type: integer
+              message:
+                type: string
+              state:
+                description: |-
+                  INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
+                  Important: Run "make" to regenerate code after modifying this file
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

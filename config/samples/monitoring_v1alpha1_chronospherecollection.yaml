@@ -1,0 +1,13 @@
+apiVersion: monitoring.chronosphere.io/v1alpha1
+kind: ChronosphereCollection
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronospherecollection-sample
+spec:
+  slug: operator-test-collection
+  name: "Operator Test: Collection"
+  created_at: "2024-02-20T15:37:39.000Z"
+  updated_at: "2024-02-20T15:37:39.000Z"
+  team_slug: operator-test-team

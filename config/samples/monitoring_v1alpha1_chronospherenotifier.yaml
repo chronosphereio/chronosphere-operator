@@ -1,0 +1,15 @@
+apiVersion: monitoring.chronosphere.io/v1alpha1
+kind: ChronosphereNotifier
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronospherenotifier-sample
+spec:
+  slug: operator-test-notifier
+  name: "Operator Test: Notfier"
+  created_at: "2024-05-01T01:11:50.000Z"
+  updated_at: "2024-05-01T13:26:00.000Z"
+  slack:
+    api_url: https://hooks.slack.com/services/foo/bar/baz
+    text: " {{/* take the default slack notifier */}} {{ template \"slack.default.text\" . }}\n{{/* append some custom stuff to the end of it */}} {{ range .Alerts.Firing }}\n{{ if ne .Annotations.magic_link \"\" }}\n{{ $start := .StartsAt.Unix }} {{ $start := printf \"%d000\" $start }}\n{{ $end := .EndsAt.Unix }} {{ $end := printf \"%d000\" $end }}\n{{ $url := .Annotations.magic_link }} {{ $url = printf \"%s&from=%s\" $url $start }}\n{{ if ne (printf \"%.1s\" $end) \"-\" }} {{ $url = printf \"%s&to=%s\" $url $end }} {{ end }}\ndashboard with timestamp: {{ $url }}\n{{ end }}\n{{ end }} "

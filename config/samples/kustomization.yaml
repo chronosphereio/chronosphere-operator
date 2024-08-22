@@ -1,0 +1,15 @@
+## Append samples of your project ##
+resources:
+- monitoring_v1alpha1_chronospheredashboard.yaml
+- monitoring_v1alpha1_chronosphereclassicdashboard.yaml
+- monitoring_v1alpha1_chronospheremonitor.yaml
+- monitoring_v1alpha1_chronospherenotifier.yaml
+- monitoring_v1alpha1_chronospherenotificationpolicy.yaml
+- monitoring_v1alpha1_chronosphereteam.yaml
+- monitoring_v1alpha1_chronospherecollection.yaml
+- monitoring_v1alpha1_chronospheredroprule.yaml
+- monitoring_v1alpha1_chronosphererolluprule.yaml
+- monitoring_v1alpha1_chronosphererecordingrule.yaml
+- monitoring_v1alpha1_chronospheremappingrule.yaml
+- monitoring_v1alpha1_chronosphereresourcepools.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

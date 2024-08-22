@@ -1,0 +1,142 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: chronospheremappingrules.monitoring.chronosphere.io
+spec:
+  group: monitoring.chronosphere.io
+  names:
+    kind: ChronosphereMappingRule
+    listKind: ChronosphereMappingRuleList
+    plural: chronospheremappingrules
+    singular: chronospheremappingrule
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ChronosphereMappingRule is the Schema for the chronospheremappingrules
+          API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ChronosphereMappingRuleSpec defines the desired state of
+              ChronosphereMappingRule
+            properties:
+              aggregation_policy:
+                description: aggregation policy
+                properties:
+                  aggregation:
+                    description: aggregation
+                    type: string
+                  drop_timestamp:
+                    description: 'Deprecated: This field is no longer supported.'
+                    type: boolean
+                  interval:
+                    description: |-
+                      Interval between aggregated data points, equivalent to the resolution
+                      field in storage policy. If set, then the storage_policy field can't be
+                      set.
+                    type: string
+                  storage_policy:
+                    description: storage policy
+                    properties:
+                      resolution:
+                        description: Required resolution of the aggregated metrics.
+                        type: string
+                      retention:
+                        description: Required retention of the aggregated metrics.
+                        type: string
+                    type: object
+                type: object
+              bucket_slug:
+                description: Required slug of the bucket the MappingRule belongs to.
+                type: string
+              created_at:
+                description: |-
+                  Timestamp of when the MappingRule was created. Cannot be set by clients.
+                  Read Only: true
+                type: string
+              drop:
+                description: |-
+                  Whether to drop the given set of metrics. If set, then the aggregation
+                  policy can't be set.
+                type: boolean
+              filters:
+                description: Required filters that determine to which metrics to apply
+                  the rule.
+                items:
+                  description: |-
+                    Configv1LabelFilter configv1 label filter
+
+
+                    swagger:model configv1LabelFilter
+                  properties:
+                    name:
+                      description: |-
+                        Name of the label to match.
+                        Example: job
+                      type: string
+                    value_glob:
+                      description: |-
+                        Glob value of the label to match.
+                        Example: myservice*
+                      type: string
+                  type: object
+                type: array
+              mode:
+                description: mode
+                type: string
+              name:
+                description: Required name of the MappingRule. May be modified after
+                  the MappingRule is created.
+                type: string
+              slug:
+                description: Unique identifier of the MappingRule. If slug is not
+                  provided, one will be generated based of the name field. Cannot
+                  be modified after the MappingRule is created.
+                type: string
+              updated_at:
+                description: |-
+                  Timestamp of when the MappingRule was last updated. Cannot be set by clients.
+                  Read Only: true
+                type: string
+            type: object
+          status:
+            description: ChronosphereMappingRuleStatus defines the observed state
+              of ChronosphereMappingRule
+            properties:
+              lastProcessedGeneration:
+                format: int64
+                type: integer
+              message:
+                type: string
+              state:
+                description: |-
+                  INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
+                  Important: Run "make" to regenerate code after modifying this file
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

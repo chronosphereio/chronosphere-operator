@@ -1,0 +1,16 @@
+apiVersion: monitoring.chronosphere.io/v1alpha1
+kind: ChronosphereDropRule
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronospheredroprule-sample
+spec:
+  slug: operator-test-drop-rule
+  name: "Operator Test: Rrop Rule"
+  created_at: "2024-02-15T00:24:18.000Z"
+  updated_at: "2024-03-11T17:50:53.000Z"
+  mode: ENABLED
+  filters:
+    - name: __name__
+      value_glob: '{foo,bar,baz}'

@@ -1,0 +1,23 @@
+# permissions for end users to view chronospherenotifiers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronospherenotifier-viewer-role
+rules:
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherenotifiers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - monitoring.chronosphere.io
+  resources:
+  - chronospherenotifiers/status
+  verbs:
+  - get

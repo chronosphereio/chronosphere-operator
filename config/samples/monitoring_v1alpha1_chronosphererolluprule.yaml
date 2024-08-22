@@ -1,0 +1,25 @@
+apiVersion: monitoring.chronosphere.io/v1alpha1
+kind: ChronosphereRollupRule
+metadata:
+  labels:
+    app.kubernetes.io/name: chronosphere-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: chronosphererolluprule-sample
+spec:
+  slug: operator-test-rollup-rule
+  name: "Operator Test: Rollup Rule"
+  created_at: "2024-03-14T20:33:06.000Z"
+  updated_at: "2024-03-14T20:33:06.000Z"
+  filters:
+    - name: __name__
+      value_glob: '{container_spec_cpu_p,container_spec_cpu_q}*'
+  metric_name: '{{ .MetricName }}:without_instance'
+  metric_type: GAUGE
+  aggregation: MAX
+  storage_policy:
+    resolution: 30s
+    retention: 120h
+  label_policy:
+    discard:
+      - instance
+  mode: PREVIEW
