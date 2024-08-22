@@ -1,5 +1,7 @@
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+
 # chronosphere-operator
-The Chronosphere Operator is a Kubernetes operator that manages the lifecycle of Chronosphere resources. It is built using the [Kubebuilder](https://book.kubebuilder.io/) framework.
+The Chronosphere Operator is a Kubernetes operator that manages the lifecycle of Chronosphere resources.
 
 ## Description
 The schema for each of these resources matches the `chronoctl` resource schema. 
