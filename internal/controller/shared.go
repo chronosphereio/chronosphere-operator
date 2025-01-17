@@ -33,7 +33,7 @@ type CustomTransport struct {
 func (c *CustomTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	uiLockResources := os.Getenv("UI_LOCK_RESOURCES")
 	if uiLockResources == "true" {
-		req.Header.Set("User-Agent", "chrono-k8s-operator/v0.43.0-a1dab007")
+		req.Header.Set("User-Agent", "chrono-config-k8s-operator/v0.43.0-a1dab007")
 	}
 	return c.rt.RoundTrip(req)
 }
